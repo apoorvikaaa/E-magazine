@@ -38,19 +38,30 @@ prevBtn.addEventListener("click", goPrevPage); // Linked to goPrev
 nextBtn.addEventListener("click", goNextPage);
 
 function openBook() {
-    book.style.transform = "translateX(50%)";
-    // Optional: Make buttons slightly more prominent when book is open
+    // If screen width is greater than 768px, shift the book
+    if (window.innerWidth > 768) {
+        book.style.transform = "translateX(50%)";
+    } else {
+        // On mobile, keep it centered but maybe shift slightly
+        book.style.transform = "translateX(0%)";
+    }
+    
+    // Ensure buttons stay visible
     prevBtn.style.opacity = "1";
     nextBtn.style.opacity = "1";
 }
 
 function closeBook(isAtBeginning) {
-    if(isAtBeginning) {
-        book.style.transform = "translateX(0%)";
+    if (window.innerWidth > 768) {
+        if(isAtBeginning) {
+            book.style.transform = "translateX(0%)";
+        } else {
+            book.style.transform = "translateX(100%)";
+        }
     } else {
-        book.style.transform = "translateX(100%)";
+        // On mobile, just keep it centered
+        book.style.transform = "translateX(0%)";
     }
-    // We don't need to reset button transforms anymore
 }
 
 function goNextPage() {
